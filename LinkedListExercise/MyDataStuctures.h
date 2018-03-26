@@ -14,11 +14,14 @@ namespace mydatastructures {
 		int getItem(int position);
 		int getLength();
 		void print();
+		LinkedList operator+(LinkedList& secondList);
+		ListBlock* getHead();
+		ListBlock* getTail();
 	private:
-		ListBlock * _head = nullptr;
+		ListBlock* _head = nullptr;
 		ListBlock* _tail = nullptr;
 		int _length = 0;
-};
+	};
 }
 
 #endif // _MY_DATA_STRUCTURES_

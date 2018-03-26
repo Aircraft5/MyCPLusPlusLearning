@@ -93,3 +93,30 @@ void LinkedList::print()
 		block = block->next;
 	}
 }
+LinkedList LinkedList::operator+(LinkedList& secondList) 
+{
+	LinkedList result = LinkedList();
+	ListBlock* block = _head;
+
+	while (block != nullptr) {
+		result.addItem(block->data);
+		block = block->next;
+	}
+
+	block = secondList.getHead();
+
+	while (block != nullptr) {
+		result.addItem(block->data);
+		block = block->next;
+	}
+
+	return result;
+}
+ListBlock* LinkedList::getHead()
+{
+	return _head;
+}
+ListBlock* LinkedList::getTail()
+{
+	return _tail;
+}
