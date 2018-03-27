@@ -3,6 +3,8 @@
 #ifndef _MY_DATA_STRUCTURES_
 #define _MY_DATA_STRUCTURES_
 
+#include <iostream>
+
 namespace mydatastructures {
 	struct ListBlock;
 
@@ -17,6 +19,7 @@ namespace mydatastructures {
 		LinkedList operator+(LinkedList& secondList);
 		ListBlock* getHead();
 		ListBlock* getTail();
+		friend std::ostream& operator<<(std::ostream& os, LinkedList& list);
 	private:
 		ListBlock* _head = nullptr;
 		ListBlock* _tail = nullptr;

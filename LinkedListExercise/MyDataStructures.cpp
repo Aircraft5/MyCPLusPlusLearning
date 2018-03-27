@@ -1,16 +1,13 @@
 #include "stdafx.h"
 #include <iostream>
-#include "MyDataStuctures.h"
-
-using namespace std;
-using namespace mydatastructures;
+#include "MyDataStructures.h"
 
 struct mydatastructures::ListBlock {
 	int data;
 	ListBlock* next = nullptr;
 };
 
-void LinkedList::addItem(int data)
+void mydatastructures::LinkedList::addItem(int data)
 {
 	ListBlock* listBlock = new ListBlock();
 
@@ -27,7 +24,7 @@ void LinkedList::addItem(int data)
 
 	_length++;
 };
-void LinkedList::addItem(int data, int position)
+void mydatastructures::LinkedList::addItem(int data, int position)
 {
 	ListBlock* listBlock = new ListBlock();
 	ListBlock* listBlockToEdit = _head;
@@ -49,7 +46,7 @@ void LinkedList::addItem(int data, int position)
 
 	_length++;
 };
-void LinkedList::removeItem(int position)
+void mydatastructures::LinkedList::removeItem(int position)
 {
 	ListBlock* blockToEdit = _head;
 	ListBlock* blockToDelete = _head;
@@ -70,7 +67,7 @@ void LinkedList::removeItem(int position)
 
 	_length--;
 };
-int LinkedList::getItem(int position)
+int mydatastructures::LinkedList::getItem(int position)
 {
 	ListBlock* block = _head;
 
@@ -80,20 +77,20 @@ int LinkedList::getItem(int position)
 
 	return block->data;
 }
-int LinkedList::getLength()
+int mydatastructures::LinkedList::getLength()
 {
 	return _length;
 };
-void LinkedList::print()
+void mydatastructures::LinkedList::print()
 {
 	ListBlock* block = _head;
 
 	while (block != nullptr) {
-		cout << block->data << endl;
+		std::cout << block->data << std::endl;
 		block = block->next;
 	}
 }
-LinkedList LinkedList::operator+(LinkedList& secondList) 
+mydatastructures::LinkedList mydatastructures::LinkedList::operator+(LinkedList& secondList)
 {
 	LinkedList result = LinkedList();
 	ListBlock* block = _head;
@@ -112,11 +109,25 @@ LinkedList LinkedList::operator+(LinkedList& secondList)
 
 	return result;
 }
-ListBlock* LinkedList::getHead()
+mydatastructures::ListBlock* mydatastructures::LinkedList::getHead()
 {
 	return _head;
 }
-ListBlock* LinkedList::getTail()
+mydatastructures::ListBlock* mydatastructures::LinkedList::getTail()
 {
 	return _tail;
+}
+
+std::ostream& mydatastructures::operator<<(std::ostream& os, mydatastructures::LinkedList& list)
+{
+	ListBlock* block = list.getHead();
+
+	while (block != nullptr) {
+		os << block->data << ' ';
+		block = block->next;
+	}
+
+	os << std::endl;
+
+	return os;
 }
