@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#include <iostream>
 #include "MyDataStructures.h"
 
 struct mydatastructures::ListBlock {

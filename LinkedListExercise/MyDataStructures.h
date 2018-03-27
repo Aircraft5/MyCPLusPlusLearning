@@ -3,8 +3,6 @@
 #ifndef _MY_DATA_STRUCTURES_
 #define _MY_DATA_STRUCTURES_
 
-#include <iostream>
-
 namespace mydatastructures {
 	struct ListBlock;
 
