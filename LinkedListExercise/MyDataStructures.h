@@ -8,6 +8,8 @@ namespace mydatastructures {
 
 	class LinkedList {
 	public:
+		LinkedList();
+		~LinkedList();
 		void addItem(int data);
 		void addItem(int data, int position);
 		void removeItem(int position);
@@ -19,9 +21,9 @@ namespace mydatastructures {
 		ListBlock* getTail();
 		friend std::ostream& operator<<(std::ostream& os, LinkedList& list);
 	private:
-		ListBlock* _head = nullptr;
-		ListBlock* _tail = nullptr;
-		int _length = 0;
+		ListBlock* _head;
+		ListBlock* _tail;
+		int _length;
 	};
 }
 

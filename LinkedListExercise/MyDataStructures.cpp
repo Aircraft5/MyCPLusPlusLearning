@@ -5,6 +5,23 @@ struct mydatastructures::ListBlock {
 	ListBlock* next = nullptr;
 };
 
+mydatastructures::LinkedList::LinkedList():
+	_head(nullptr),
+	_tail(nullptr),
+	_length(0)
+{};
+
+mydatastructures::LinkedList::~LinkedList()
+{
+	ListBlock* nextBlock = _head;	
+
+	while (nextBlock != nullptr) {
+		ListBlock* blockToDelete = nextBlock;
+		nextBlock = blockToDelete->next;		
+		delete blockToDelete;
+	}
+};
+
 void mydatastructures::LinkedList::addItem(int data)
 {
 	ListBlock* listBlock = new ListBlock();
