@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MyDataStructures.h"
 
 struct mydatastructures::ListBlock {
@@ -5,7 +6,7 @@ struct mydatastructures::ListBlock {
 	ListBlock* next = nullptr;
 };
 
-mydatastructures::LinkedList::LinkedList():
+mydatastructures::LinkedList::LinkedList(void):
 	_head(nullptr),
 	_tail(nullptr),
 	_length(0)
@@ -105,20 +106,20 @@ void mydatastructures::LinkedList::print()
 		block = block->next;
 	}
 }
-mydatastructures::LinkedList mydatastructures::LinkedList::operator+(LinkedList& secondList)
+mydatastructures::LinkedList* mydatastructures::LinkedList::operator+(LinkedList& secondList)
 {
-	LinkedList result = LinkedList();
+	LinkedList* result = new LinkedList();
 	ListBlock* block = _head;
 
 	while (block != nullptr) {
-		result.addItem(block->data);
+		result->addItem(block->data);
 		block = block->next;
 	}
 
 	block = secondList.getHead();
 
 	while (block != nullptr) {
-		result.addItem(block->data);
+		result->addItem(block->data);
 		block = block->next;
 	}
 
@@ -146,3 +147,57 @@ std::ostream& mydatastructures::operator<<(std::ostream& os, mydatastructures::L
 
 	return os;
 }
+
+mydatastructures::Vector::Vector() : elem{ new double[0] }, sz{ 0 } {}
+
+mydatastructures::Vector::Vector(int s) : elem{ new double[s] }, sz{ s }
+{
+	for (int i = 0; i != s; i++)
+		elem[i] = 0;
+}
+
+mydatastructures::Vector::Vector(const Vector& a) : elem{ new double[a.sz] },
+	sz{ a.sz }
+{
+	std::cout << "Copy";
+	for (int i = 0; i != sz; ++i) {
+		elem[i] = a.elem[i];
+	}
+}
+
+mydatastructures::Vector::Vector(Vector&& a) : elem{ a.elem }, sz{ a.sz } {
+	std::cout << "move";
+	a.elem = nullptr;
+	a.sz = 0;
+}
+
+mydatastructures::Vector& mydatastructures::Vector::operator=(mydatastructures::Vector&& a) {
+	elem = a.elem;
+	sz = a.sz;
+
+	std::cout << "move1";
+	a.elem = nullptr;
+	a.sz = 0;
+
+	return *this;
+}
+
+mydatastructures::Vector& mydatastructures::Vector::operator=(const mydatastructures::Vector& a)
+{
+	double* p = new double[a.sz];
+	for (int i = 0; i != a.sz; ++i) {
+		p[i] = a.elem[i];
+	}
+
+	delete[] elem;
+	elem = p;
+
+	sz = a.sz;
+	return *this;
+}
+
+mydatastructures::Vector::~Vector() { delete[] elem; }
+
+double& mydatastructures::Vector::operator[](int i) const { return elem[i]; }
+
+int mydatastructures::Vector::size() const { return sz; }
